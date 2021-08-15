@@ -4,9 +4,9 @@ import Home from "../router/Home";
 import Movies from "../router/Movies";
 import Search from "../router/Search";
 import TV from "../router/TV";
-import Header from "./header";
+import Header from "./Header";
 
-export default ()=>(
+export default () => (
     <Router>
         <>
             <Header />
