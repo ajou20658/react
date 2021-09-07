@@ -1,3 +1,3 @@
-import SearchContainer from "./SearchContainer";
+import SearchContainer from "router/Search/SearchContainer";
 
 export default SearchContainer;

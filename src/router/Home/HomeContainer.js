@@ -1,7 +1,6 @@
 import React from "react";
-import { __SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED } from "react-dom";
-import HomePresenter from "./HomePresenter";
-
+import HomePresenter from "router/Home/HomePresenter";
+import { moviesApi } from "api";
 
 export default class extends React.Component{
     state = {
@@ -11,14 +10,44 @@ export default class extends React.Component{
         error : null,
         loading: true
     };
+
+    async componentDidMount(){
+        try{
+            const {
+                data: {results: nowPlaying}
+            } = await moviesApi.nowPlaying();
+            //console.log(nowPlaying);
+            const {
+                data: {results: upcoming}
+            } = await moviesApi.upcoming();
+            const {
+                data: {results: popular}
+            } = await moviesApi.popular();
+            this.setState({
+                nowPlaying,
+                upcoming,
+                popular
+            })
+        }catch{
+            this.setState({
+                error: "Can't find movies information."
+            });
+        }finally{
+            this.setState({
+                loading:false
+            });
+        }
+    }
+
     render() {
+        //console.log(this.state);
         const {nowPlaying,upcoming,popular,error,loading} = this.state;
-        return <HomePresenter
+        return (<HomePresenter
             nowPlaying={nowPlaying}
             upcoming ={upcoming}
             popular={popular}
             error={error}
             loading={loading}
-        />;
+        />);
     }
 }

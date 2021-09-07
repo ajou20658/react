@@ -1,3 +1,3 @@
-import TVContainer from "./TVContainer";
+import TVContainer from "router/TV/TVContainer";
 
 export default TVContainer;
